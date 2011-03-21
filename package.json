@@ -1,0 +1,10 @@
+{
+    "name": "series",
+  , "version": "0.0.1",
+  , "description": "Syncable set",
+  , "keywords": [],
+  , "author": "Joris Röling <joris@bonboa.com>",
+  , "dependencies": {}
+  , "main": "index"
+  , "engines": { "node": "0.4.x" }
+}
