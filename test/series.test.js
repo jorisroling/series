@@ -10,16 +10,18 @@ var series=Series('main');
 var other_series=new Series('other');
 
 
-series.subscribe(function(obj) {
-//	series.dump(this);
-	other_series.act(obj);
-});
-
-other_series.subscribe(function(obj) {
-	series.act(obj);
-});
-
-
+// series.on('change', function(obj) {
+//     other_series.act(obj);
+// })
+// 
+// other_series.on('change', function(obj) {
+//     series.act(obj);
+// })
+// 
+// other_series.on('error', function(obj) {
+//     eyes(obj);
+// })
+// 
 
 module.exports = {
 	'test .version': function() {
@@ -73,11 +75,6 @@ module.exports = {
 		other_series.items.should.not.have.property(124);
 	},
 	'test .sync': function() {
-//		for (var i=0;i<100;i++) series.remove(i);
-		                              
 		series.items.should.eql(other_series.items);
-		
-		// series.dump();
-		// other_series.dump();
 	},
 };
