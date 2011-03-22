@@ -101,6 +101,18 @@ code .this { color: #19469D; }</style>
 	<body>
 <a href="http://github.com/jjupiter/series"><img alt="Fork me on GitHub" id="ribbon" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a><table id="source"><tbody><tr><td><h1>Series</h1><p>Syncable <em>Set</em> for <a href="http://nodejs.org">node</a>.	Check out the <a href="http://github.com/jjupiter/series">Github Repo</a> for the 	source and installation guide.</p></td><td></td></tr><tr class="filename"><td><h2 id="lib/series.js"><a href="#">series</a></h2></td><td>lib/series.js</td></tr><tr class="code">
 <td class="docs">
+<p>"use strict"</p>
+</td>
+<td class="code">
+<pre><code>!
+ * <span class="class">Series</span>
+ * <span class="class">Copyright</span>(<span class="variable">c</span>) <span class="number integer">2011</span> <span class="class">Joris</span> <span class="class">R</span>ö<span class="variable">ling</span> &<span class="variable">lt</span>;<span class="variable">joris</span>@<span class="variable">bonboa</span>.<span class="variable">com</span>&<span class="variable">gt</span>;
+ * <span class="class">MIT</span> <span class="class">Licensed</span>
+ </code></pre>
+</td>
+</tr>
+<tr class="code">
+<td class="docs">
 <p>Module dependencies.
  </p>
 </td>
@@ -145,7 +157,7 @@ code .this { color: #19469D; }</style>
  </p>
 </td>
 <td class="code">
-<pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">version</span> =  <span class="string">'0.0.2'</span>;</code></pre>
+<pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">version</span> =  <span class="string">'0.0.3'</span>;</code></pre>
 </td>
 </tr>
 <tr class="code">
@@ -173,7 +185,7 @@ code .this { color: #19469D; }</style>
 <td class="code">
 <pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">change</span> = <span class="keyword">function</span>(<span class="variable">action</span>,<span class="variable">key</span>,<span class="variable">reason</span>) 
 {
-    <span class="keyword">for</span> (<span class="variable">s</span> <span class="keyword">in</span> <span class="variable">series_list</span>[<span class="this">this</span>.<span class="variable">kind</span>]) {
+    <span class="keyword">for</span> (<span class="keyword">var</span> <span class="variable">s</span> <span class="keyword">in</span> <span class="variable">series_list</span>[<span class="this">this</span>.<span class="variable">kind</span>]) {
         <span class="keyword">if</span> (<span class="variable">series_list</span>[<span class="this">this</span>.<span class="variable">kind</span>][<span class="variable">s</span>]!==<span class="this">this</span>) {
             <span class="variable">series_list</span>[<span class="this">this</span>.<span class="variable">kind</span>][<span class="variable">s</span>].<span class="variable">act</span>({<span class="variable">action</span>:<span class="variable">action</span>,<span class="variable">param</span>:<span class="variable">key</span>,<span class="variable">reason</span>:<span class="variable">reason</span>});
         }
@@ -289,10 +301,10 @@ That last bit is reflected in in the returned boolean.</p>
             <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">set</span>(<span class="variable">obj</span>.<span class="variable">param</span>);
             <span class="keyword">break</span>;
         <span class="keyword">case</span> <span class="string">'remove'</span>:
-            <span class="variable">remove</span>=<span class="this">this</span>.<span class="variable">remove</span>(<span class="variable">obj</span>.<span class="variable">param</span>);
+            <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">remove</span>(<span class="variable">obj</span>.<span class="variable">param</span>);
             <span class="keyword">break</span>;
         <span class="keyword">case</span> <span class="string">'clear'</span>:
-            <span class="variable">remove</span>=<span class="this">this</span>.<span class="variable">clear</span>();
+            <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">clear</span>();
             <span class="keyword">break</span>;
         <span class="keyword">default</span>: 
             <span class="variable">eyes</span>(<span class="string">'NOT Acting:'</span>);
