@@ -1,6 +1,6 @@
 {
 	"name": "series",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Syncable set",
 	"keywords": ["library","syncable","set","observable"],
 	"author": "Joris Röling <joris@bonboa.com>",

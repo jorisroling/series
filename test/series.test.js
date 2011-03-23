@@ -9,6 +9,30 @@ var series=Series('main');
 
 var other_series=new Series('other');
 
+/**
+ * Eyes 
+ *
+ * @api private
+ */
+var eyes = require('eyes').inspector({
+    styles: {
+        all: 'cyan',
+        label: 'underline',
+        other: 'inverted',
+        key: 'bold',
+        special: 'grey',
+        string: 'green',
+        number: 'magenta',
+        bool: 'blue',
+        regexp: 'yellow',
+    },
+    pretty: true,
+    hideFunctions: false,
+    stream: process.stdout,
+    maxLength: null
+});   
+
+
 
 // series.on('change', function(obj) {
 //     other_series.act(obj);
@@ -73,8 +97,11 @@ module.exports = {
 		other_series.remove(124);
 		series.items.should.not.have.property(124);
 		other_series.items.should.not.have.property(124);
+		
 	},
 	'test .sync': function() {
 		series.items.should.eql(other_series.items);
+		eyes(series);
+		eyes(other_series);
 	},
 };
