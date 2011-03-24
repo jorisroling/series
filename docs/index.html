@@ -135,7 +135,7 @@ code .this { color: #19469D; }</style>
 <pre><code><span class="keyword">var</span> <span class="variable">series_list</span> = {};
   
 <span class="keyword">function</span> <span class="class">Series</span>(<span class="variable">name</span>,<span class="variable">kind</span>) {
-    <span class="keyword">if</span> ((<span class="this">this</span> <span class="variable">instanceof</span> <span class="class">Series</span>) === <span class="variable">false</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="class">Series</span>(<span class="variable">name</span>);
+    <span class="keyword">if</span> ((<span class="this">this</span> <span class="variable">instanceof</span> <span class="class">Series</span>) === <span class="variable">false</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="class">Series</span>(<span class="variable">name</span>,<span class="variable">kind</span>);
     <span class="this">this</span>.<span class="variable">items</span> = {};    
     <span class="this">this</span>.<span class="variable">key</span>=<span class="string">'id'</span>;
     <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="variable">name</span> !== <span class="string">'undefined'</span>) <span class="this">this</span>.<span class="variable">name</span>=<span class="variable">name</span>;
@@ -157,7 +157,7 @@ code .this { color: #19469D; }</style>
  </p>
 </td>
 <td class="code">
-<pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">version</span> =  <span class="string">'0.0.3'</span>;</code></pre>
+<pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">version</span> =  <span class="string">'0.0.6'</span>;</code></pre>
 </td>
 </tr>
 <tr class="code">
@@ -180,7 +180,7 @@ code .this { color: #19469D; }</style>
 
 <h2></h2>
 
-<ul><li><p><strong>param</strong>: <em>string</em>  action ('set','remove','clear')</p></li><li><p><strong>param</strong>: <em>string</em>  key</p></li><li><p><strong>param</strong>: <em>string</em>  reason</p></li></ul>
+<ul><li><p><strong>param</strong>: <em>string</em>  action ('set','unset','clear')</p></li><li><p><strong>param</strong>: <em>string</em>  key</p></li><li><p><strong>param</strong>: <em>string</em>  reason</p></li></ul>
 </td>
 <td class="code">
 <pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">change</span> = <span class="keyword">function</span>(<span class="variable">action</span>,<span class="variable">key</span>,<span class="variable">reason</span>) 
@@ -244,7 +244,7 @@ That last bit is reflected in in the returned boolean.</p>
 </tr>
 <tr class="code">
 <td class="docs">
-<p>Removes an item based on the key, and fires notifications to observers if any changes actually happened.
+<p>Unsets an item based on the key, and fires notifications to observers if any changes actually happened.
 That last bit is reflected in in the returned boolean.</p>
 
 <h2></h2>
@@ -252,11 +252,11 @@ That last bit is reflected in in the returned boolean.</p>
 <ul><li><p><strong>param</strong>: <em>string</em>  key</p></li><li><p><strong>return</strong>: <em>Boolean</em> </p></li></ul>
 </td>
 <td class="code">
-<pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">remove</span> = <span class="keyword">function</span>(<span class="variable">key</span>) {
+<pre><code><span class="class">Series</span>.<span class="variable">prototype</span>.<span class="variable">unset</span> = <span class="keyword">function</span>(<span class="variable">key</span>) {
     <span class="keyword">var</span> <span class="variable">result</span>=<span class="variable">false</span>;
     <span class="keyword">if</span> (<span class="this">this</span>.<span class="variable">items</span>.<span class="variable">hasOwnProperty</span>(<span class="variable">key</span>)) {
         <span class="keyword">delete</span>(<span class="this">this</span>.<span class="variable">items</span>[<span class="variable">key</span>]);
-        <span class="this">this</span>.<span class="variable">change</span>(<span class="string">'remove'</span>,<span class="variable">key</span>);
+        <span class="this">this</span>.<span class="variable">change</span>(<span class="string">'unset'</span>,<span class="variable">key</span>);
         <span class="variable">result</span>=<span class="variable">true</span>;
     }   
     <span class="keyword">return</span> <span class="variable">result</span>;
@@ -300,15 +300,15 @@ That last bit is reflected in in the returned boolean.</p>
         <span class="keyword">case</span> <span class="string">'set'</span>:
             <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">set</span>(<span class="variable">obj</span>.<span class="variable">param</span>);
             <span class="keyword">break</span>;
-        <span class="keyword">case</span> <span class="string">'remove'</span>:
-            <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">remove</span>(<span class="variable">obj</span>.<span class="variable">param</span>);
+        <span class="keyword">case</span> <span class="string">'unset'</span>:
+            <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">unset</span>(<span class="variable">obj</span>.<span class="variable">param</span>);
             <span class="keyword">break</span>;
         <span class="keyword">case</span> <span class="string">'clear'</span>:
             <span class="variable">result</span>=<span class="this">this</span>.<span class="variable">clear</span>();
             <span class="keyword">break</span>;
         <span class="keyword">default</span>: 
-            <span class="variable">eyes</span>(<span class="string">'NOT Acting:'</span>);
-            <span class="variable">eyes</span>(<span class="variable">obj</span>);
+            <span class="variable">console</span>.<span class="variable">log</span>(<span class="string">'NOT Acting:'</span>);
+            <span class="variable">console</span>.<span class="variable">dir</span>(<span class="variable">obj</span>);
             <span class="keyword">break</span>;
     }
     <span class="keyword">delete</span> <span class="this">this</span>.<span class="variable">disableNotifications</span>;
