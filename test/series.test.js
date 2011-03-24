@@ -68,9 +68,9 @@ module.exports = {
 		item=other_series.get(123);
 		item.should.have.property('id',123);
 	},
-	'test .remove': function() {
+	'test .unset': function() {
 		Object.keys(other_series.items).length.should.not.eql(0);
-		other_series.remove(123);
+		other_series.unset(123);
 		
 		series.items.should.not.have.property(123);
 		other_series.items.should.not.have.property(123);
@@ -87,14 +87,14 @@ module.exports = {
 		Object.keys(series.items).length.should.eql(0);
 		Object.keys(other_series.items).length.should.eql(0);
 	},
-	'test .remove2': function() {
+	'test .unset2': function() {
 		series.set({id:124,joris: 'GEK'});
 		var item=series.get(124);
 		should.ok(item);
 		
 		item.should.have.property(series.key);
 
-		other_series.remove(124);
+		other_series.unset(124);
 		series.items.should.not.have.property(124);
 		other_series.items.should.not.have.property(124);
 		
@@ -103,5 +103,6 @@ module.exports = {
 		series.items.should.eql(other_series.items);
 		eyes(series);
 		eyes(other_series);
+//		eyes({'bool':true,'undefined':undefined,'null':null,'int':123,'float':123.45,'string':'Joris','object':{a:'a',b:'b'},'array':[1,2,3,'4']});
 	},
 };
